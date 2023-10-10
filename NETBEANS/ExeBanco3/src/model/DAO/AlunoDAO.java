@@ -8,7 +8,9 @@ package model.DAO;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Aluno;
 
@@ -32,4 +34,38 @@ public class AlunoDAO {
             
             con.close();
     }
+    
+    
+    public void excluir(int ra) throws SQLException, ClassNotFoundException {
+    con = new Conexao().getConnection();
+    String sql = "DELETE FROM alunoJava where ra= ?";
+    PreparedStatement stmt = con.prepareStatement(sql);
+    stmt.setInt(1, ra);
+    stmt.execute();
+    stmt.close();
+    
+    
+    con.close();
+    }
+    
+    public ArrayList<Aluno> buscarAluno() throws SQLException, ClassNotFoundException{
+    ResultSet rs;
+    ArrayList<Aluno> lista = new ArrayList();
+    con = new Conexao().getConnection();
+    String sql = "SELECT * FROM alunoJava";
+    PreparedStatement stmt = con.prepareStatement(sql);
+    rs = stmt.executeQuery();
+    while (rs.next())
+    {
+    int ra = rs.getInt("RA");
+    String nome = rs.getString("NOME");
+    Aluno al = new Aluno(ra, nome);
+    lista.add(al);
+    }
+    stmt.close();
+    con.close();
+    return lista;
+    }
+    
+    
 }

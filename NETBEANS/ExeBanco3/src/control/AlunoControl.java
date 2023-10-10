@@ -6,6 +6,7 @@
 package control;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.Aluno;
 import model.DAO.AlunoDAO;
 
@@ -22,4 +23,16 @@ public class AlunoControl {
         alDao.inserirAluno(al);
     }
     
+    public void excluirAluno (int ra) throws SQLException, ClassNotFoundException
+    {
+       AlunoDAO alDao2 = new AlunoDAO();
+       alDao2.excluir(ra);
+    }
+    
+    public ArrayList<Aluno> ConsultarAlunos() throws SQLException, ClassNotFoundException
+    {
+        AlunoDAO alDao2 = new AlunoDAO();
+        return(alDao2.buscarAluno());
+   
+    }
 }
