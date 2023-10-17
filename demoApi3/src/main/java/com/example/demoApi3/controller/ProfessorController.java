@@ -2,10 +2,7 @@ package com.example.demoApi3.controller;
 
 import com.example.demoApi3.model.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.demoApi3.repository.ProfessorRepository;
 
 import java.util.List;
@@ -29,5 +26,15 @@ public class ProfessorController {
         return prfrepo.findById(ProfRa);
     }
 
+    @GetMapping("/todos/nome/{nome}")
+    public List<Professor> buscarPorNome(@PathVariable("nome") String nome){return prfrepo.findByNome(nome);}
+
+    @GetMapping("/todos/altura/{altura}")
+    public List<Professor> buscarPorAltura(@PathVariable("altura") Double altura){return prfrepo.findByAltura(altura);}
+
+    @PostMapping("/inserir")
+    public void inserirProfessor(@RequestBody Professor prof){
+        prfrepo.save(prof);
+    }
 }
 
