@@ -36,5 +36,15 @@ public class ProfessorController {
     public void inserirProfessor(@RequestBody Professor prof){
         prfrepo.save(prof);
     }
+
+    @GetMapping("/todos/nomealtura/{nome}/{altura}")
+    public List<Professor>buscarNomeAltura(@PathVariable("nome") String nome, @PathVariable("altura") double altura){
+        return prfrepo.findByNomeAltura(nome,altura);
+    }
+
+    @GetMapping("/todos/nomeprofra/{nome}/{ProfRa}")
+    public List<Professor>buscarNomeProfra(@PathVariable("nome") String nome,@PathVariable("ProfRa") int Profra){
+        return prfrepo.findByNomeProfra(nome, Profra);
+    }
 }
 

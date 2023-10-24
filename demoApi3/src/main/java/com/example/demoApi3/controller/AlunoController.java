@@ -44,6 +44,44 @@ public class AlunoController {
         alrepo.save(al);
     }
 
+    @DeleteMapping("/remover")
+    public void removerAluno(@RequestBody Aluno al){alrepo.delete(al);}
+
+    @DeleteMapping("/remover/ra/{ra}")
+    public void removerAlunoPorId(@PathVariable("ra") int ra){
+        alrepo.deleteById(ra);
+    }
+
+    @PutMapping("/atualizar")
+    public void atualizarAluno(@RequestBody Aluno al){alrepo.save(al);}
+
+    @GetMapping("/todos/partenome/{partenome}")
+    public List<Aluno> buscarPorParteNome (@PathVariable("partenome") String parteNome){
+        return alrepo.findByParteNome(parteNome) ;
+
+    }
+
+    @GetMapping("/todos/ramaiorque/{ra}")
+    public List<Aluno> buscarRaMaiorQue(@PathVariable("ra") int ra){
+        return  alrepo.findbyRaMaiorQue(ra);
+    }
+
+
+    @GetMapping("/todos/alturamenorque/{altura}")
+    public List<Aluno>buscarAlturaMenorQue(@PathVariable("altura") double altura){
+        return alrepo.findbyAlturaMenorQue(altura);
+    }
+
+    @GetMapping("/todos/nomera/{nome}/{ra}")
+    public List<Aluno> buscarNomeRa (@PathVariable("nome") String nome,@PathVariable("ra") int ra){
+        return alrepo.findByNomeRa(nome,ra);
+    }
+
+    @GetMapping("/todos/nomealtura/{nome}/{altura}")
+    public List<Aluno> buscarNomeAltura (@PathVariable("nome") String nome,@PathVariable("altura")double altura){
+        return alrepo.findbyNomeAltura(nome,altura);
+    }
+
 
 }
 
